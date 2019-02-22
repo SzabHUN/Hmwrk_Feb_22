@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace N_Szab_Homewrk_Feb_22
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Please enter a number, that you want to convert from the DECIMAL base: ");
+            int input = Convert.ToInt32(Console.ReadLine());
+            String terS = String.Empty;
+            Console.WriteLine("\n\n");
+            string binary = String.Empty, aa = String.Empty;
+
+            aa = Console.ReadLine().ToUpper();
+
+            switch (aa)
+            {
+                case "BINARY": //2
+                    binary = Convert.ToString(input, 2);
+                    break;
+                    /*
+                case "TERNARY": //3
+                    break;
+                case "QUATERNARY": //4
+                    break;
+                case "QUINARY": //5
+                    break;
+                case "SENARY": //6
+                    break;
+                    */
+                case "OCTAL": //8
+                    binary = Convert.ToString(input, 8);
+                    break;
+                case "DECIMAL": //10 - remove this or don't. I don't really care :P 
+                    Console.WriteLine("but... this... is.... the base you entered the original number... but ok...");
+                    binary = Convert.ToString(input, 10);
+                    break;
+                    /*
+                case "DUODECIMAL": //12
+                    break;
+                    */
+                case "HEXADECIMAL": //16
+                    binary = Convert.ToString(input, 16);
+                    break;
+                    /*
+                case "VIGESIMAL": //20
+                    break;
+                    */
+                case "HEXAVIGESIMAL": //26
+                   binary = IntToString(42, Enumerable.Range('A', 26).Select(x => (char)x).ToArray());
+                    break;
+                case "SEXAGESIMAL": //60
+                    binary = IntToString(42,
+                            new char[]
+                            { '0','1','2','3','4','5','6','7','8','9',
+                              'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+                              'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x'});
+                    break;
+                default:
+                    Console.WriteLine("something went wrong....");
+                    break;
+            }
+
+            
+            Console.WriteLine(binary);
+            Console.ReadKey(true);
+        }
+        public static string IntToString(int input, char[] baseChars)
+        {
+            string result = string.Empty;
+            int targetBase = baseChars.Length;
+
+            do
+            {
+                result = baseChars[input % targetBase] + result;
+                input = input / targetBase;
+            }
+            while (input > 0);
+
+            return result;
+        }
+    }
+}
